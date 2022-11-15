@@ -108,8 +108,8 @@ public class PasswordPaymentActivity extends AppCompatActivity implements Bootpa
                     }
 
                     @Override
-                    public void onClose(String data) {
-                        Log.d("bootpay", "close: " + data);
+                    public void onClose() {
+//                        Log.d("bootpay", "close: " + data);
                         Bootpay.removePaymentWindow();
                     }
 

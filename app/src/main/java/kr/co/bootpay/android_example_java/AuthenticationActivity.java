@@ -75,8 +75,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onClose(String data) {
-                        Log.d("bootpay", "close: " + data);
+                    public void onClose() {
                         Bootpay.removePaymentWindow();
                     }
 

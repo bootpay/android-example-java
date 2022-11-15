@@ -21,6 +21,7 @@ import kr.co.bootpay.android_example_java.deprecated.BootpayRestImplement;
 import kr.co.bootpay.android_example_java.deprecated.EasyPayUserTokenData;
 import kr.co.bootpay.android_example_java.deprecated.TokenData;
 import kr.co.bootpay.bio.BootpayBio;
+import kr.co.bootpay.bio.models.BioExtra;
 import kr.co.bootpay.bio.models.BioPayload;
 import kr.co.bootpay.bio.models.BioPrice;
 
@@ -66,7 +67,7 @@ public class PasswordUIPaymentActivity extends AppCompatActivity implements Boot
     void BootpayTest(String userToken) {
         BootUser user = new BootUser().setPhone("010-1234-5678"); // 구매자 정보
 
-        BootExtra extra = new BootExtra();
+        BioExtra extra = new BioExtra();
 
 
         List<BootItem> items = new ArrayList<>();
@@ -96,7 +97,6 @@ public class PasswordUIPaymentActivity extends AppCompatActivity implements Boot
 //        map.put("2", "abcdef55");
 //        map.put("3", 1234);
 //        payload.setMetadata(map);
-//        payload.setMetadata(new Gson().toJson(map));
 
         BootpayBio.init(getApplicationContext())
                 .setBioPayload(payload)
@@ -112,8 +112,7 @@ public class PasswordUIPaymentActivity extends AppCompatActivity implements Boot
                     }
 
                     @Override
-                    public void onClose(String data) {
-                        Log.d("bootpay", "close: " + data);
+                    public void onClose() {
                         BootpayBio.removePaymentWindow();
                     }
 

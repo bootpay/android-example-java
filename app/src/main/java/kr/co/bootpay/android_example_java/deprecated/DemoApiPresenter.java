@@ -97,44 +97,4 @@ public class DemoApiPresenter {
         });
     }
 
-//        service.getApi().getEasyPayUserToken(
-//                "Bearer " + restToken,
-//                user.getId(),
-//                user.getEmail(),
-//                user.getUsername(),
-//                user.getGender(),
-//                user.getBirth(),
-//                user.getPhone()
-//        ).retry(3)
-//                .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
-//                .subscribe(
-//                        new Observer<EasyPayUserTokenData>() {
-//                            @Override
-//                            public void onComplete() {
-//                                if(parentScope.parent != null && parentScope.easyPayUserToken != null) {
-//                                    parentScope.parent.callbackEasyPayUserToken(easyPayUserToken);
-//                                    parentScope.easyPayUserToken = null;
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onSubscribe(Disposable d) {
-//                            }
-//
-//                            @Override
-//                            public void onNext(EasyPayUserTokenData res) {
-//                                if(parentScope.parent != null) {
-//                                    parentScope.easyPayUserToken = res;
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onError(Throwable e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                );
-//
-//    }
-
 }
