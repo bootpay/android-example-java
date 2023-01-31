@@ -15,10 +15,26 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+
+    signingConfigs {
         release {
-            minifyEnabled false
+            storeFile file('keystore.keystore') // 기준은 App 폴더 기준이다.
+            storePassword "bootpaytest"
+            keyAlias "key_bootpay"
+            keyPassword "bootpaytest"
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -38,7 +54,7 @@ dependencies {
 
 
 
-    implementation 'io.github.bootpay:android:4.2.3'
+    implementation 'io.github.bootpay:android:4.2.7'
     implementation 'io.github.bootpay:android-bio:4.2.4'
 
     implementation 'com.google.code.gson:gson:2.9.0'
