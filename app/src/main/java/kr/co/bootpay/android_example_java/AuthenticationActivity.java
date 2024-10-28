@@ -33,6 +33,9 @@ public class AuthenticationActivity extends AppCompatActivity {
         BootUser user = new BootUser().setPhone("010-4033-4678"); // 구매자 정보
 
         BootExtra extra = new BootExtra()
+                .setShowCloseButton(true)
+                .setOpenType("iframe")
+
                 .setCardQuota("0,2,3"); // 일시불, 2개월, 3개월 할부 허용, 할부는 최대 12개월까지 사용됨 (5만원 이상 구매시 할부허용 범위)
 
 
@@ -61,7 +64,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         payload.setMetadata(map);
 //        payload.setMetadata(new Gson().toJson(map));
 
-        Bootpay.init(getSupportFragmentManager(), getApplicationContext())
+        Bootpay.init(getSupportFragmentManager())
                 .setPayload(payload)
                 .setEventListener(new BootpayEventListener() {
                     @Override
