@@ -12,11 +12,20 @@ def localPropsFile = rootProject.file('local.properties')
 if (localPropsFile.exists()) {
     localPropsFile.withInputStream { bootpayProps.load(it) }
 }
-def bootpayEnv = (bootpayProps.getProperty('BOOTPAY_ENV') ?: 'production').trim()
+def bootpayValue = { value ->
+    def trimmed = (value ?: '').trim()
+    if (!trimmed || trimmed == 'undefined' || trimmed == 'null' || (trimmed.startsWith('$(') && trimmed.endsWith(')'))) {
+        return ''
+    }
+    return trimmed
+}
+def bootpayEnv = bootpayValue(bootpayProps.getProperty('BOOTPAY_ENV') ?: 'production')
+if (bootpayEnv != 'development') bootpayEnv = 'production'
 def bootpayKey = { devKey, prodKey, devFallback, prodFallback ->
     def key = bootpayEnv == 'development' ? devKey : prodKey
     def fallback = bootpayEnv == 'development' ? devFallback : prodFallback
-    return (bootpayProps.getProperty(key) ?: fallback).trim()
+    def value = bootpayValue(bootpayProps.getProperty(key))
+    return value ?: fallback
 }
 
 
