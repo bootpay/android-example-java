@@ -2,18 +2,41 @@ plugins {
     id 'com.android.application'
 }
 
+// ===== Bootpay 환경 키 로딩 (.env → local.properties → production fallback) =====
+def bootpayProps = new Properties()
+def envFile = rootProject.file('.env')
+if (envFile.exists()) {
+    envFile.withInputStream { bootpayProps.load(it) }
+}
+def localPropsFile = rootProject.file('local.properties')
+if (localPropsFile.exists()) {
+    localPropsFile.withInputStream { bootpayProps.load(it) }
+}
+def bootpayEnv = (bootpayProps.getProperty('BOOTPAY_ENV') ?: 'production').trim()
+def bootpayKey = { devKey, prodKey, devFallback, prodFallback ->
+    def key = bootpayEnv == 'development' ? devKey : prodKey
+    def fallback = bootpayEnv == 'development' ? devFallback : prodFallback
+    return (bootpayProps.getProperty(key) ?: fallback).trim()
+}
+
+
 android {
     namespace "kr.co.bootpay.android_example_java"
     compileSdk 35
 
     defaultConfig {
         applicationId "kr.co.bootpay.android_example_java"
-        minSdk 23
+        minSdk 24
         targetSdk 35
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "BOOTPAY_CLIENT_KEY", "\"${bootpayKey('BOOTPAY_CLIENT_KEY_DEV', 'BOOTPAY_CLIENT_KEY_PROD', 'hxS-Up--5RvT6oU6QJE0JA', 'sEN72kYZBiyMNytA8nUGxQ')}\""
+        buildConfigField "String", "BOOTPAY_SERVER_KEY", "\"${bootpayKey('BOOTPAY_SERVER_KEY_DEV', 'BOOTPAY_SERVER_KEY_PROD', 'r5zxvDcQJiAP2PBQ0aJjSHQtblNmYFt6uFoEMhti_mg=', 'rnZLJamENRgfwTccwmI_Uu9cxsPpAV9X2W-Htg73yfU=')}\""
+        buildConfigField "String", "BOOTPAY_REST_APPLICATION_ID", "\"${bootpayKey('BOOTPAY_REST_APPLICATION_ID_DEV', 'BOOTPAY_REST_APPLICATION_ID_PROD', '59b731f084382614ebf72215', '5b8f6a4d396fa665fdc2b5ea')}\""
+        buildConfigField "String", "BOOTPAY_PRIVATE_KEY", "\"${bootpayKey('BOOTPAY_PRIVATE_KEY_DEV', 'BOOTPAY_PRIVATE_KEY_PROD', 'WwDv0UjfwFa04wYG0LJZZv1xwraQnlhnHE375n52X0U=', 'rm6EYECr6aroQVG2ntW0A6LpWnkTgP4uQ3H18sDDUYw=')}\""
     }
 
 
@@ -38,6 +61,10 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -55,7 +82,7 @@ dependencies {
 
 
 
-    implementation 'io.github.bootpay:android:5.0.0'
+    implementation 'io.github.bootpay:android:5.1.1'
 //    implementation 'io.github.bootpay:android-bio:4.2.4'
 
     implementation 'com.google.code.gson:gson:2.10.1'

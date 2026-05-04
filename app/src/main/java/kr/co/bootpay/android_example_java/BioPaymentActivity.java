@@ -30,7 +30,7 @@
 //    String restApplicationId = "5b8f6a4d396fa665fdc2b5ea"; //production
 //    @Deprecated
 //    String privateKey = "rm6EYECr6aroQVG2ntW0A6LpWnkTgP4uQ3H18sDDUYw="; //production
-//    String applicationId = "5b8f6a4d396fa665fdc2b5e8";
+//    String clientKey = BootpayConfig.clientKey;
 //
 //    @Override
 //    protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,14 +40,13 @@
 //        if(BootpayBuildConfig.DEBUG) {
 //            restApplicationId = "59b731f084382614ebf72215";
 //            privateKey = "WwDv0UjfwFa04wYG0LJZZv1xwraQnlhnHE375n52X0U=";
-//            applicationId = "5b9f51264457636ab9a07cdc";
 //        }
 //    }
 //
 //
 //    public void PaymentTest(View v) {
 //
-//        BootpayRest.getRestToken(this, this, restApplicationId, privateKey);
+//        BootpayRest.getRestTokenWithClientKey(this, this, BootpayConfig.clientKey, BootpayConfig.serverKey);
 //    }
 //
 //    public BootUser getBootUser() {
@@ -77,7 +76,7 @@
 //        items.add(item2);
 //
 //        BioPayload payload = new BioPayload();
-//        payload.setApplicationId(applicationId)
+//        payload.setClientKey(clientKey)
 //                .setOrderName("부트페이 결제테스트")
 //                .setPg("나이스페이")
 //                .setOrderId("1234")

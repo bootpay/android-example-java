@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import kr.co.bootpay.android.Bootpay;
-import kr.co.bootpay.android.constants.BootpayBuildConfig;
 import kr.co.bootpay.android.events.BootpayEventListener;
 import kr.co.bootpay.android.models.BootExtra;
 import kr.co.bootpay.android.models.BootItem;
@@ -23,15 +22,10 @@ import kr.co.bootpay.android.models.Payload;
 public class SubscriptionPaymentActivity extends AppCompatActivity {
 //    BootpayWebView bootpayWebView;
 
-    String applicationId = "5b8f6a4d396fa665fdc2b5e8";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscription_payment);
-        if(BootpayBuildConfig.DEBUG) {
-            applicationId = "5b9f51264457636ab9a07cdc";
-        }
     }
 
 
@@ -48,7 +42,7 @@ public class SubscriptionPaymentActivity extends AppCompatActivity {
         items.add(item2);
 
         Payload payload = new Payload();
-        payload.setApplicationId(applicationId)
+        payload.setClientKey(BootpayConfig.clientKey)
                 .setOrderName("부트페이 결제테스트")
                 .setPg("페이레터")
                 .setMethod("카드자동")

@@ -43,7 +43,7 @@ public class TotalPaymentActivity extends AppCompatActivity {
         items.add(item2);
 
         Payload payload = new Payload();
-        payload.setApplicationId("5b8f6a4d396fa665fdc2b5e8")
+        payload.setClientKey(BootpayConfig.clientKey)
                 .setOrderName("부트페이 결제테스트")
                 .setOrderId("1234")
                 .setPrice(1000d)
