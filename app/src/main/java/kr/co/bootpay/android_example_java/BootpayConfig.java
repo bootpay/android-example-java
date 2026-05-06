@@ -8,6 +8,7 @@ public class BootpayConfig {
     public static String serverKey = BuildConfig.BOOTPAY_SERVER_KEY;
 
     // Legacy 호환용. 기존 application_id/private_key 방식 테스트가 필요할 때만 사용하세요.
+    public static String applicationId = BuildConfig.BOOTPAY_APPLICATION_ID;
     public static String restApplicationId = BuildConfig.BOOTPAY_REST_APPLICATION_ID;
     public static String privateKey = BuildConfig.BOOTPAY_PRIVATE_KEY;
 }
