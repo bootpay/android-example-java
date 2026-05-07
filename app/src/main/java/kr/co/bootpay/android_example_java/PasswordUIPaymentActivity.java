@@ -46,7 +46,7 @@
 //
 //    public void PaymentTest(View v) {
 //
-//        BootpayRest.getRestTokenWithClientKey(this, this, BootpayConfig.clientKey, ""); // server_key 는 서버사이드 전용
+//        BootpayRest.getRestTokenWithClientKey(this, this, BootpayConfig.clientKey, ""); // secret_key 는 서버사이드 전용
 //    }
 //
 //    public BootUser getBootUser() {

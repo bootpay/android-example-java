@@ -18,10 +18,10 @@ public class BootpayRest {
         presenter.getRestToken(restApplicationId, privateKey);
     }
 
-    /** 권장 방식: client_key/server_key 인증. server_key는 실서비스 클라이언트 앱에 포함하지 말고 서버사이드에서만 사용하세요. */
-    public static void getRestTokenWithClientKey(Context context, BootpayRestImplement parent, String clientKey, String serverKey) {
+    /** 권장 방식: client_key/secret_key 인증. secret_key는 실서비스 클라이언트 앱에 포함하지 말고 서버사이드에서만 사용하세요. */
+    public static void getRestTokenWithClientKey(Context context, BootpayRestImplement parent, String clientKey, String secretKey) {
         if (presenter == null) presenter = new DemoApiPresenter(new DemoApiService(context), parent);
-        presenter.getRestTokenWithClientKey(clientKey, serverKey);
+        presenter.getRestTokenWithClientKey(clientKey, secretKey);
     }
 
     @Deprecated
